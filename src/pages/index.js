@@ -13,20 +13,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { graphql } from "gatsby"
+import * as StorageManager from "../StorageManager.js";
 
 
 export default class IndexPage extends React.Component{
 
+  componentDidMount(){
+   
+  }
   constructor(inProps){
     super(inProps);
     // Attach state, and determine if the dialog is shown based on whether we have a username in localStorage.
-    const username = localStorage.getItem("username");
+   
+    const username = StorageManager.getName();
     console.log(`IndexPage.constructor(): username=${username}`);
     this.state = {
-      dialogVisible : (username === null || username.trim() === ""),
+      dialogVisible : (username === null || username === ""),
       username : username
     };
-
     // Capture the data passed in.
     this.data = inProps.data;
   }
@@ -44,7 +48,8 @@ export default class IndexPage extends React.Component{
       this.setState({dialogVisible:false});
 
       // Finally, store the username.
-      localStorage.setItem("username", this.state.username);
+      //localStorage.setItem("username", this.state.username);
+      StorageManager.setName(this.state.username);
 
     }
   }

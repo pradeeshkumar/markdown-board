@@ -1,6 +1,10 @@
+const isBrowser=typeof window!=="undefined";
 
 export function getAllMarkerKeysFromStorage(inDocumentID) {
 
+    if(!isBrowser){
+        return;
+    }
   const markerKeys = [ ];
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -23,7 +27,9 @@ export function getAllMarkerKeysFromStorage(inDocumentID) {
  * @return       An object with all marker data.
  */
 export function getMarkerFromStorage(inKey) {
-
+    if(!isBrowser){
+        return;
+    }
   return JSON.parse(localStorage.getItem(inKey));
 
 } /* End getMarkerFromStorage(). */
@@ -36,7 +42,24 @@ export function getMarkerFromStorage(inKey) {
  * @param inMarker An object containing all marker data.
  */
 export function saveMarkerToStorage(inKey, inMarker) {
-
+    if(!isBrowser){
+        return;
+    }
   localStorage.setItem(inKey, JSON.stringify(inMarker));
 
 } /* End saveMarker */
+
+export function getName(){
+    if(!isBrowser){
+        return;
+    }
+  return  localStorage.getItem("username");
+
+}
+
+export function setName(name){
+    if(!isBrowser){
+        return;
+    }
+    localStorage.setItem("username", name);
+}

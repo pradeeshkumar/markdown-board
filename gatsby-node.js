@@ -1,12 +1,6 @@
 exports.createPages = async ({ actions ,graphql}) => {
   const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
-  })
-
+  
   // createPage({
   //   path: "/documents/practical_flutter",
   //   component:require.resolve("./src/templates/documentTemplate.js"),

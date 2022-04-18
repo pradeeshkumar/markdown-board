@@ -13,6 +13,8 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import * as StorageManager from "../StorageManager.js";
 
+const isBrowser=typeof window!=="undefined";
+if(isBrowser){
 window.showComments = function(inKey) {
 
     console.log("showComments()", inKey);
@@ -35,18 +37,23 @@ window.showComments = function(inKey) {
     this.setState((inState, inProps) => { return this.state; });
   
   }
+}
 export default class Template extends React.Component {
 
 
     constructor(inProps){
         
         super(inProps);
+        if(isBrowser){
         window.showComments=window.showComments.bind(this);
+        }
         
         this.mr= inProps.data.markdownRemark;
         this.currentMarkerKey=null;
         this.state = { addCommentButtonDisabled : true, addCommentDialogVisible : false, newComment : "", comments : [ ] };
     }
+
+    
     componentDidMount(){
         this.loadMarkers();
     }
@@ -186,7 +193,9 @@ let self=this;
   StorageManager.saveMarkerToStorage(this.currentMarkerKey, marker);
 
   // Finally, re-show the comments so the new one is displayed too.
+  if(isBrowser){
   window.showComments(this.currentMarkerKey);
+  }
     }
     
     render(){
