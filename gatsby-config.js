@@ -41,6 +41,26 @@ module.exports = {
         path:`${__dirname}/src/documents`
       }
     },
-    "gatsby-transformer-remark"
+    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "MarkdownBoard",
+        short_name: "MdBoard",
+        start_url: "/",
+        background_color: "#6b37bf",
+        theme_color: "#6b37bf",
+        display: "standalone",
+        icon: "src/images/icon.jpeg",
+        crossOrigin: "use-credentials",
+      }
+    },
+    {
+      resolve: "gatsby-plugin-offline",
+      options: {
+        debug : true
+      }
+    }
+    
   ],
 }
